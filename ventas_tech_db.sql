@@ -1,74 +1,130 @@
-CREATE DATABASE VentasTecnologia;
-GO
-USE VentasTecnologia;
-GO
-CREATE TABLE Categorias (
-CategoriaID INT PRIMARY KEY,
-NombreCategoria VARCHAR(100) NOT NULL
-);
-GO
-CREATE TABLE Productos (
-ProductoID INT PRIMARY KEY,
-NombreProducto VARCHAR(100) NOT NULL,
-Precio DECIMAL(10,2) NOT NULL,
-CategoriaID INT NOT NULL,
+-- =====================================
+--Base de datos: Ventas_Tech_DB3
+--Proyecto: RetailPro--
+--Autor Cicera Dornelles
+-- =====================================
 
-FOREIGN KEY (CategoriaID)
-REFERENCES Categorias(CategoriaID)
-);
+-- =========================================
+-- CREACIÓN DE BASE DE DATOS
+-- =========================================
+CREATE DATABASE Ventas_Tech_DB;
 GO
+USE Ventas_Tech_DB;
+GO
+-- =========================================
+-- ELIMINACIÓN DE TABLAS EXISTENTES
+-- =========================================
 
-CREATE TABLE Clientes (
-ClienteID INT PRIMARY KEY,
-Nombre VARCHAR(100) NOT NULL,
-Email VARCHAR(100) NOT NULL,
-Ciudad VARCHAR(100)
-);
+DROP TABLE IF EXISTS ventas;
+DROP TABLE IF EXISTS productos;
+DROP TABLE IF EXISTS clientes;
+DROP TABLE IF EXISTS categorias;
 GO
 
-CREATE TABLE Ventas (
-VentaID INT PRIMARY KEY,
-Fecha DATE NOT NULL,
-ClienteID INT NOT NULL,
-ProductoID INT NOT NULL,
-Cantidad INT NOT NULL,
+-- =========================================
+-- CREAR TABLA CATEGORIAS
+-- =========================================
 
-FOREIGN KEY (ClienteID)
-REFERENCES Clientes(ClienteID),
-
-FOREIGN KEY (ProductoID)
-REFERENCES Productos(ProductoID)
+CREATE TABLE categorias (
+id_categoria INT PRIMARY KEY,
+nombre_categoria VARCHAR(100) NOT NULL
 );
 GO
 
-INSERT INTO Categorias VALUES
+-- =========================================
+-- CREAR TABLA CLIENTES
+-- =========================================
+
+CREATE TABLE clientes (
+id_cliente INT PRIMARY KEY,
+nombre VARCHAR(100) NOT NULL,
+email VARCHAR(100) NOT NULL,
+ciudad VARCHAR(100)
+);
+GO
+
+-- =========================================
+-- CREAR TABLA PRODUCTOS
+-- =========================================
+
+CREATE TABLE productos (
+id_producto INT PRIMARY KEY,
+nombre_producto VARCHAR(100) NOT NULL,
+precio DECIMAL(10,2) NOT NULL,
+id_categoria INT NOT NULL,
+
+FOREIGN KEY (id_categoria)
+REFERENCES categorias(id_categoria)
+);
+GO
+
+-- =========================================
+-- CREAR TABLA VENTAS
+-- =========================================
+
+CREATE TABLE ventas (
+id_venta INT PRIMARY KEY,
+id_cliente INT NOT NULL,
+id_producto INT NOT NULL,
+cantidad INT NOT NULL DEFAULT 1,
+precio_unitario DECIMAL(10,2) NOT NULL,
+fecha_venta DATE NOT NULL,
+FOREIGN KEY (id_cliente)
+REFERENCES clientes(id_cliente),
+FOREIGN KEY (id_producto)
+REFERENCES productos(id_producto)
+);
+GO
+ 
+-- =========================================
+-- CARGA DE DATOS: CATEGORIAS
+-- ========================================= 
+INSERT INTO categorias
+VALUES
 (1,'Laptops'),
-(2,'Perifericos'),
-(3,'Audio');
+(2,'Monitores'),
+(3,'Accesorios');
+GO
+  
+ -- =========================================
+ -- CARGA DE DATOS: CLIENTES
+ -- ========================================= 
+ 
+INSERT INTO clientes
+VALUES
+(1,'Ana Gomez','ana@email.com','Montevideo'),
+(2,'Juan Perez','juan@email.com','Canelones'),
+(3,'Laura Silva','laura@email.com','Maldonado');
+GO
+ 
+ -- =========================================
+ -- CARGA DE DATOS: PRODUCTOS
+ -- =========================================
+INSERT INTO productos
+VALUES
+(1,'Notebook Lenovo',850.00,1),
+(2,'Monitor Samsung',250.00,2),
+(3,'Mouse Logitech',30.00,3);
 GO
 
-INSERT INTO Productos VALUES
-(1,'Notebook HP',35000.00,1),
-(2,'Notebook Lenovo',42000.00,1),
-(3,'Mouse Gamer',1200.00,2),
-(4,'Teclado Mecanico',2500.00,2),
-(5,'Auriculares Sony',3500.00,3);
-GO
-INSERT INTO Clientes VALUES
-(1,'Juan Perez','juan@gmail.com','Montevideo'),
-(2,'Ana Lopez','ana@gmail.com','Canelones'),
-(3,'Pedro Silva','pedro@gmail.com','Maldonado');
-GO
-INSERT INTO Ventas VALUES
-(1,'2025-01-05',1,3,2),
-(2,'2025-01-06',2,1,1),
-(3,'2025-01-08',3,5,1),
-(4,'2025-01-10',1,4,1),
-(5,'2025-01-11',2,3,3),
-(6,'2025-01-15',3,2,1),
-(7,'2025-01-20',1,5,2),
-(8,'2025-01-22',2,4,1),
-(9,'2025-01-25',3,1,1),
-(10,'2025-01-30',1,3,2);
+ -- =========================================
+ -- CARGA DE DATOS: VENTAS
+ -- =========================================
+
+INSERT INTO ventas
+VALUES
+(1,1,1,1,850.00,'2025-01-10'),
+(2,2,2,2,250.00,'2025-01-15'),
+(3,1,3,3,30.00,'2025-02-05'),
+(4,3,1,1,850.00,'2025-02-20'),
+(5,2,3,5,30.00,'2025-03-01');
 GO
 
+-- =========================================
+-- CONSULTAS DE VALIDACIÓN
+-- =========================================
+ 
+SELECT * FROM categorias;
+SELECT * FROM clientes;
+SELECT * FROM productos;
+SELECT * FROM ventas;
