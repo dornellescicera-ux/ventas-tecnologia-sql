@@ -62,7 +62,7 @@ Ejecutar el archivo `ventas_tech_db.sql`
 Verificar la creación de las tablas
 Ejecutar las consultas de validación incluidas al final del script.
 
-## Consultas de Validación67 
+## Consultas de Validación
 
 ```sql
 SELECT * FROM categorias;
