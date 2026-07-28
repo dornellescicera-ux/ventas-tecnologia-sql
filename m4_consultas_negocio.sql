@@ -24,7 +24,7 @@ GO
 -- CONSULTA 2: RANKING DE PRODUCTOS
 -- =========================================
 
-SELECT TOP 5
+SELECT TOP (5)
   id_producto,
   SUM(cantidad) AS unidades_vendidas,
   SUM(cantidad * precio_unitario) AS total_facturado
@@ -37,26 +37,27 @@ SELECT TOP 5
 -- =========================================
 
 SELECT
-  id_cliente,
-  COUNT(*) AS cantidad_pedidos,
-  SUM(cantidad * precio_unitario) AS total_gastado
-  FROM ventas
-  GROUP BY id_cliente
-  HAVING COUNT(*) > 
-  ORDER BY total_gastado DESC;
+id_cliente,
+COUNT(*) AS cantidad_pedidos,
+SUM(cantidad * precio_unitario) AS total_gastado
+FROM ventas
+GROUP BY id_cliente
+HAVING COUNT(*) > 1
+ORDER BY total_gastado DESC;
 
 -- =========================================
 -- CONSULTA 4: MESES POR ENCIMA O DEBAJO
 -- DEL PROMEDIO MENSUAL
 -- =========================================
 
-WITH ventas_mensuales AS (
+ WITH ventas_mensuales AS (
   SELECT
   MONTH(fecha_venta) AS mes,
   SUM(cantidad * precio_unitario) AS total_facturado
   FROM ventas
   GROUP BY MONTH(fecha_venta)
   )
+ 
 
   SELECT
   mes,
@@ -80,3 +81,6 @@ WITH ventas_mensuales AS (
 -- 1. El producto 1 generó la mayor facturación total.
 -- 2. El mes de febrero presentó la mayor facturación.
 -- 3. El cliente 1 realizó compras recurrentes y acumuló el mayor gasto.
+
+
+
