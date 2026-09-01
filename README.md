@@ -8,10 +8,10 @@ La base de datos permite almacenar información sobre categorías, productos, cl
 
 ## Objetivo
 
-Analizar el comportamiento de las ventas.
-Identificar los productos con mayor facturación.
-Detectar clientes recurrentes.
-Generar información útil para la toma de decisiones comerciales.
+- Analizar el comportamiento de las ventas.
+- Identificar los productos con mayor facturación.
+- Detectar clientes recurrentes.
+- Generar información útil para la toma de decisiones comerciales.
 
 ## Base de Datos
 
