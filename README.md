@@ -8,15 +8,24 @@ La base de datos permite almacenar información sobre categorías, productos, cl
 
 ## Objetivo
 
-Desarrollar una base de datos funcional que sirva como base para la realización de consultas de negocio y análisis de información.
+Analizar el comportamiento de las ventas.
+Identificar los productos con mayor facturación.
+Detectar clientes recurrentes.
+Generar información útil para la toma de decisiones comerciales.
 
 ## Base de Datos
 
 **Nombre:** Ventas_Tech_DB
 
+## Estructura del proyecto
+
+- Módulo 4: Consultas de negocio.
+- Módulo 5: JOINs y relaciones entre tablas.
+- Scripts SQL documentados.
+
 ## Estructura de Tablas
 
-### categorias
+### categorías
 
 - id_categoria
 - nombre_categoria
@@ -70,6 +79,11 @@ SELECT * FROM clientes;
 SELECT * FROM productos;
 SELECT * FROM ventas;
 ```
+## Principales hallazgos
+
+El producto 1 fue el de mayor facturación.
+Febrero registró la facturación más alta.
+El cliente 1 presentó el mayor gasto acumulado.
 
 ## Autor
 
